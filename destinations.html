@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 3 of 12: Destinations
+     Owner: Student 1 - Discover Safar North
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Student 1: Destinations search bar styles (matches shared theme) */
+    .search-box {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--pine);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .search-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .search-row input {
+      flex: 1;
+    }
+    .search-row .btn {
+      white-space: nowrap;
+    }
+    .search-status {
+      font-size: 14px;
+      color: var(--grey);
+      margin-top: 10px;
+    }
+    .no-results {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--earth);
+      border-radius: 10px;
+      padding: 28px 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .no-results h3 {
+      margin-bottom: 8px;
+    }
+    .no-results p {
+      color: var(--grey);
+      margin-bottom: 16px;
+    }
+    @media (max-width: 640px) {
+      .search-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-row .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button type="button" class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html" class="active" aria-current="page">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Passu_Cones_-_Hunza_Valley_Pakistan.jpg?width=1400')">
+      <h1>Destinations</h1>
+      <p>Choose a place to start planning your trip</p>
+      <p class="photo-credit">Photo: Passu Cones, Hunza Valley (Wikimedia Commons)</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <!-- Real-time Destination Search -->
+        <div class="search-box" role="search" aria-label="Search destinations">
+          <label for="search-input">Search destinations</label>
+          <div class="search-row">
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Search by place, region, or landmark (e.g. Hunza, Skardu, Lake)..."
+              autocomplete="off"
+            >
+            <button type="button" id="clear-search" class="btn btn-outline" onclick="clearSearch()">Clear Search</button>
+          </div>
+          <p class="search-status" id="search-status" aria-live="polite"></p>
+        </div>
+
+        <!-- Dynamically generated destination cards -->
+        <div class="grid-3" id="destination-grid"></div>
+
+        <!-- Helpful message when no destination matches -->
+        <div class="no-results" id="no-results" hidden>
+          <h3>No matching destinations found</h3>
+          <p id="no-results-text"></p>
+          <button type="button" class="btn btn-small" onclick="clearSearch()">Show All Destinations</button>
+        </div>
+
+        <p class="note">"From" price = Basic package + local costs + return coach fare from Islamabad. Sample prices for the demo.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p><span aria-hidden="true">📞</span> 0300-0000000 (demo) · <span aria-hidden="true">✉</span> hello@safarnorth.example</p>
+        <button type="button" class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 1: destination data, dynamic cards, and real-time search -----
+    const destinations = [
+      {
+        id: "hunza",
+        name: "Hunza Valley",
+        location: "Hunza, Gilgit-Baltistan",
+        price: 38000,
+        description: "A valley on the Karakoram Highway, known for Baltit and Altit forts, Attabad Lake and views of Rakaposhi (7,788 m).",
+        keywords: "karakoram highway baltit altit attabad lake rakaposhi passu",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley%2C_view_from_Eagle%27s_Nest.jpg?width=800",
+        alt: "Hunza Valley seen from Eagle's Nest viewpoint",
+        credit: "Photo: Alllexxxis (CC BY-SA 4.0, Wikimedia Commons)"
+      },
+      {
+        id: "skardu",
+        name: "Skardu",
+        location: "Skardu, Gilgit-Baltistan",
+        price: 41000,
+        description: "The main town of Baltistan and the gateway to K2 treks, with the Kachura lakes and the Deosai Plains nearby.",
+        keywords: "baltistan k2 kachura lake shangrila deosai plains katpana desert",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila%2C_Lower_Kachura_Lake.jpg?width=800",
+        alt: "Lower Kachura (Shangrila) Lake near Skardu",
+        credit: "Photo: Hasanijaz (CC BY-SA 4.0, Wikimedia Commons)"
+      },
+      {
+        id: "naran",
+        name: "Naran Kaghan",
+        location: "Mansehra, Khyber Pakhtunkhwa",
+        price: 32000,
+        description: "A summer valley along the Kunhar River, famous for Lake Saiful Muluk and the road to Babusar Top.",
+        keywords: "kunhar river saiful muluk lake babusar top mansehra kpk summer",
+        image: "https://commons.wikimedia.org/wiki/Special:FilePath/Saiful_Muluk_Lake_near_Naran%2C_Kaghan_Valley_4.jpg?width=800",
+        alt: "Saiful Muluk Lake near Naran, Kaghan Valley",
+        credit: "Photo: Kashif Rehman Arain (CC BY-SA 4.0, Wikimedia Commons)"
+      }
+    ];
+
+    const gridEl = document.getElementById("destination-grid");
+    const searchInput = document.getElementById("search-input");
+    const searchStatus = document.getElementById("search-status");
+    const noResultsBox = document.getElementById("no-results");
+    const noResultsText = document.getElementById("no-results-text");
+
+    // Build one destination card element
+    function createDestinationCard(place) {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const img = document.createElement("img");
+      img.src = place.image;
+      img.alt = place.alt;
+      img.onerror = function () {
+        this.onerror = null;
+        this.src = "images/placeholder.svg";
+      };
+
+      const body = document.createElement("div");
+      body.className = "card-body";
+
+      const loc = document.createElement("span");
+      loc.className = "location";
+      const pin = document.createElement("span");
+      pin.setAttribute("aria-hidden", "true");
+      pin.textContent = "📍 ";
+      loc.appendChild(pin);
+      loc.appendChild(document.createTextNode(place.location));
+
+      const title = document.createElement("h3");
+      title.textContent = place.name;
+
+      const desc = document.createElement("p");
+      desc.textContent = place.description;
+
+      const price = document.createElement("p");
+      price.className = "price";
+      price.appendChild(document.createTextNode("From " + pkr(place.price) + " "));
+      const perPerson = document.createElement("small");
+      perPerson.textContent = "/ person";
+      price.appendChild(perPerson);
+
+      const credit = document.createElement("p");
+      credit.className = "caption";
+      credit.textContent = place.credit;
+
+      const link = document.createElement("a");
+      link.href = "destination-details.html?place=" + encodeURIComponent(place.id);
+      link.className = "btn btn-small";
+      link.textContent = "View Details →";
+
+      body.appendChild(loc);
+      body.appendChild(title);
+      body.appendChild(desc);
+      body.appendChild(price);
+      body.appendChild(credit);
+      body.appendChild(link);
+
+      card.appendChild(img);
+      card.appendChild(body);
+      return card;
+    }
+
+    // Render matching cards and update status or empty message
+    function renderDestinations(list, queryText) {
+      gridEl.innerHTML = "";
+
+      if (list.length === 0) {
+        noResultsBox.hidden = false;
+        noResultsText.textContent =
+          'No destinations matched "' + queryText + '". Try searching for Hunza, Skardu, Naran, Gilgit-Baltistan, or Lake.';
+        searchStatus.textContent = "Showing 0 of " + destinations.length + " destinations";
+        return;
+      }
+
+      noResultsBox.hidden = true;
+      for (let i = 0; i < list.length; i++) {
+        gridEl.appendChild(createDestinationCard(list[i]));
+      }
+
+      if (queryText === "") {
+        searchStatus.textContent = "Showing all " + destinations.length + " destinations";
+      } else {
+        searchStatus.textContent =
+          "Showing " + list.length + " of " + destinations.length + ' destinations for "' + queryText + '"';
+      }
+    }
+
+    // Filter destinations in real time as the user types
+    function filterDestinations() {
+      const rawQuery = searchInput.value.trim();
+      const query = rawQuery.toLowerCase();
+
+      if (query === "") {
+        renderDestinations(destinations, "");
+        return;
+      }
+
+      const matches = destinations.filter(function (place) {
+        const searchable = (
+          place.name + " " + place.location + " " + place.description + " " + place.keywords
+        ).toLowerCase();
+        return searchable.indexOf(query) !== -1;
+      });
+
+      renderDestinations(matches, rawQuery);
+    }
+
+    // Clear the search input and show every destination again
+    function clearSearch() {
+      searchInput.value = "";
+      filterDestinations();
+      searchInput.focus();
+    }
+
+    searchInput.addEventListener("input", filterDestinations);
+    renderDestinations(destinations, "");
+  </script>
+
+</body>
+</html>
