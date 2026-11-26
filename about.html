@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 2 of 12: About Safar North
+     Owner: Student 1 - Discover Safar North
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Safar North | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button type="button" class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active" aria-current="page">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley_from_above_the_Biltit_Fort.jpg?width=1400')">
+      <h1>About Safar North</h1>
+      <p><span lang="ur" dir="rtl">سفر</span> (safar) means "journey" in Urdu</p>
+      <p class="photo-credit">Photo: Hunza Valley from above Baltit Fort by Aamir Fawad (CC BY-SA 4.0, Wikimedia Commons)</p>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="section">
+      <div class="container split">
+        <div>
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Baltit_Fort_Hunza_valley.jpg?width=1000" alt="Baltit Fort in Karimabad, Hunza Valley" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+          <p class="caption">Baltit Fort, Karimabad, Hunza — Photo by AZEEM SHERA (CC BY-SA 4.0, Wikimedia Commons)</p>
+        </div>
+        <div>
+          <h2>Who we are</h2>
+          <p>Safar North is a sample tour company made by a student team for our ICT class project. It shows how a traveller could plan a trip to Northern Pakistan online.</p>
+          <p><b>Our mission:</b> make trip planning to the north simple and clear, so every family and student knows the cost before they travel.</p>
+          <span class="demo-badge">Class project: not a registered company</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT WE OFFER -->
+    <section class="section bg-white">
+      <div class="container">
+        <div class="section-title"><h2>What the website offers</h2></div>
+        <div class="grid-4">
+          <div class="box"><h3><span aria-hidden="true">🏔</span> Destinations</h3><p>Hunza, Skardu and Naran Kaghan with photos and tips.</p></div>
+          <div class="box"><h3><span aria-hidden="true">🧭</span> Packages</h3><p>Basic, Comfort and Adventure trips with clear prices.</p></div>
+          <div class="box"><h3><span aria-hidden="true">⛺</span> Stays &amp; Gear</h3><p>Guest house, hotel or campsite, plus camping gear.</p></div>
+          <div class="box"><h3><span aria-hidden="true">✅</span> Booking Summary</h3><p>See every cost in PKR before you confirm.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY A LOCAL COMPANY -->
+    <section class="section">
+      <div class="container grid-2">
+        <div class="box">
+          <h3>Why travel with a local company?</h3>
+          <ul class="ticks">
+            <li>Local guides know the roads, weather and safe seasons.</li>
+            <li>Money stays with local guest houses and drivers.</li>
+            <li>Help is close by if a road is blocked by a landslide.</li>
+            <li>Guides can share the culture and history of each valley.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Our team</h3>
+          <p>Four students built this website. Each student made one part:</p>
+          <ul class="ticks">
+            <li>Student 1: Discover (Home, About, Destinations)</li>
+            <li>Student 2: Choose a Trip (Details, Packages, Plan a Trip)</li>
+            <li>Student 3: Stay &amp; Gear (Stays, Camping Gear, Cart)</li>
+            <li>Student 4: Review &amp; Confirm (Details, Checkout, Confirmation)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE FAQ -->
+    <section class="section bg-sky">
+      <div class="container narrow" id="faq-list">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Click any question to read the answer, or expand all at once.</p>
+          <div class="actions" style="justify-content:center">
+            <button type="button" class="btn btn-small btn-outline" id="faq-toggle-all" onclick="toggleAllFaqs()">Expand All</button>
+          </div>
+        </div>
+        <details>
+          <summary>Is this a real booking website?</summary>
+          <p>No. It is a class demo. No booking is made and no money is taken.</p>
+        </details>
+        <details>
+          <summary>Which cities can I travel from?</summary>
+          <p>Islamabad, Rawalpindi, Peshawar, Lahore, Faisalabad, Multan and Karachi.</p>
+        </details>
+        <details>
+          <summary>When is the best time to visit the north?</summary>
+          <p>Mostly May to September. Roads to high places like Deosai and Babusar Top are often closed by snow in winter.</p>
+        </details>
+        <details>
+          <summary>How is the trip cost worked out?</summary>
+          <p>(Destination cost + package price + return coach fare) × number of travellers. Stays and gear are added on top.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACT (demo details) -->
+    <section class="section">
+      <div class="container narrow center">
+        <h2>Contact</h2>
+        <p class="muted">Demo contact details for the class project.</p>
+        <p><span aria-hidden="true">📞</span> 0300-0000000 · <span aria-hidden="true">✉</span> hello@safarnorth.example · <span aria-hidden="true">📍</span> Islamabad</p>
+        <div class="actions" style="justify-content:center">
+          <a href="destinations.html" class="btn">See Destinations →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p><span aria-hidden="true">📞</span> 0300-0000000 (demo) · <span aria-hidden="true">✉</span> hello@safarnorth.example</p>
+        <button type="button" class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 1: interactive FAQs on About page -----
+    const faqItems = document.querySelectorAll("#faq-list details");
+    const faqToggleBtn = document.getElementById("faq-toggle-all");
+
+    function updateFaqButton() {
+      let allOpen = true;
+      for (let i = 0; i < faqItems.length; i++) {
+        if (!faqItems[i].open) {
+          allOpen = false;
+          break;
+        }
+      }
+      faqToggleBtn.innerText = allOpen ? "Collapse All" : "Expand All";
+      faqToggleBtn.setAttribute("aria-expanded", String(allOpen));
+    }
+
+    function toggleAllFaqs() {
+      let allOpen = true;
+      for (let i = 0; i < faqItems.length; i++) {
+        if (!faqItems[i].open) {
+          allOpen = false;
+          break;
+        }
+      }
+      let nextState = !allOpen;
+      for (let i = 0; i < faqItems.length; i++) {
+        faqItems[i].open = nextState;
+      }
+      updateFaqButton();
+    }
+
+    for (let i = 0; i < faqItems.length; i++) {
+      faqItems[i].addEventListener("toggle", updateFaqButton);
+    }
+    updateFaqButton();
+  </script>
+
+</body>
+</html>
