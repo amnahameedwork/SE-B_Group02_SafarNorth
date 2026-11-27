@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 12 of 12: Booking Confirmation
+     Owner: Student 4 - Review and Confirm
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container narrow">
+        <div class="box center" id="confirmation">
+          <h2>No booking yet</h2>
+          <p class="muted">Plan a trip and confirm it on the checkout page to see your confirmation here.</p>
+          <div class="actions" style="justify-content:center">
+            <a href="destinations.html" class="btn">Start Planning</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 4: confirmation page -----
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatGearSafely(booking) {
+      if (Array.isArray(booking.gearItems)) {
+        if (booking.gearItems.length === 0) return "None";
+        let parts = [];
+        for (let i = 0; i < booking.gearItems.length; i++) {
+          let item = booking.gearItems[i];
+          parts.push(escapeHtml(item.name || "") + " × " + Number(item.qty || 0));
+        }
+        return parts.join("<br>");
+      }
+      if (!booking.gear || booking.gear === "None") return "None";
+      let rawLines = String(booking.gear).split(/<br\s*\/?>/i);
+      let safeLines = [];
+      for (let i = 0; i < rawLines.length; i++) {
+        if (rawLines[i].trim() !== "") safeLines.push(escapeHtml(rawLines[i]));
+      }
+      return safeLines.length > 0 ? safeLines.join("<br>") : "None";
+    }
+
+    let booking = getData("booking", null);
+
+    if (booking != null) {
+      let tripCost = Number(booking.tripCost || 0);
+      let stayCost = Number(booking.stayCost || 0);
+      let gearCost = Number(booking.gearCost || 0);
+      let totalCost = Number(booking.total || (tripCost + stayCost + gearCost));
+
+      let contactLines = "";
+      if (booking.email) {
+        contactLines += '<div class="line"><span>Email</span><span>' + escapeHtml(booking.email) + '</span></div>';
+      }
+      if (booking.phone) {
+        contactLines += '<div class="line"><span>Mobile</span><span>' + escapeHtml(booking.phone) + '</span></div>';
+      }
+
+      document.getElementById("confirmation").innerHTML =
+        '<div class="tick">✓</div>' +
+        '<h2>Thank you, ' + escapeHtml(booking.name || "Guest") + '!</h2>' +
+        '<p>Your <b>demo</b> trip to ' + escapeHtml(booking.destination || "Northern Pakistan") + ' is confirmed.</p>' +
+        '<div class="ref">Reference: ' + escapeHtml(booking.ref || "SN-DEMO-0000") + '</div>' +
+        '<div style="text-align:left">' +
+          '<div class="line"><span>Lead traveller</span><span>' + escapeHtml(booking.name || "Not entered") + '</span></div>' +
+          contactLines +
+          '<div class="line"><span>Destination</span><span>' + escapeHtml(booking.destination || "-") + '</span></div>' +
+          '<div class="line"><span>From</span><span>' + escapeHtml(booking.city || "-") + '</span></div>' +
+          '<div class="line"><span>Travel date</span><span>' + escapeHtml(booking.date || "-") + '</span></div>' +
+          '<div class="line"><span>Package</span><span>' + escapeHtml(booking.package || "-") + ' (' + Number(booking.nights || 0) + ' nights)</span></div>' +
+          '<div class="line"><span>Travellers</span><span>' + escapeHtml(booking.travellers || "-") + '</span></div>' +
+          '<div class="line"><span>Stay</span><span>' + escapeHtml(booking.stay || "None") + '</span></div>' +
+          '<div class="line"><span>Camping gear</span><span>' + formatGearSafely(booking) + '</span></div>' +
+          '<div class="line"><span>Trip (package, local costs, coach)</span><span>' + pkr(tripCost) + '</span></div>' +
+          '<div class="line"><span>Stay (' + Number(booking.nights || 0) + ' nights)</span><span>' + pkr(stayCost) + '</span></div>' +
+          '<div class="line"><span>Camping gear</span><span>' + pkr(gearCost) + '</span></div>' +
+          '<div class="line total"><span>Estimated total</span><span>' + pkr(totalCost) + '</span></div>' +
+        '</div>' +
+        '<p class="note">This is a sample confirmation for a class project. It is not a real reservation and no payment has been made.</p>' +
+        '<div class="actions" style="justify-content:center">' +
+          '<a href="index.html" class="btn">Return to Home</a>' +
+          '<button class="btn btn-outline" onclick="startOver()">Plan a New Trip</button>' +
+        '</div>';
+    }
+  </script>
+</body>
+</html>
