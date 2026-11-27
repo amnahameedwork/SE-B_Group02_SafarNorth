@@ -10,10 +10,10 @@ A 12-page static website (HTML5, CSS3, vanilla JavaScript) presenting a comprehe
 
 | Name | Roll Number | Pages Built | Features Built |
 | :--- | :--- | :--- | :--- |
-| Muhammad Qasim | 26i-3055 | `index.html` (Home)<br>`about.html` (About Safar North)<br>`destinations.html` (Destinations) | Shared responsive layout & navigation, Interactive FAQ accordion with expand/collapse all, Dynamic destination catalogue rendering, Real-time search filter with empty state, Trip Budget Estimator with validation & localStorage persistence, Local image optimization & asset attribution. |
-| Student 2 (Teammate) | TBD | `destination-details.html`, `packages.html`, `booking.html` | Destination details, Tour package selection, Plan a Trip custom booking flow. |
-| Student 3 (Teammate) | TBD | `accommodation.html`, `camping-shop.html`, `cart.html` | Lodging options, Camping gear shop, Shopping cart & item storage. |
-| Student 4 (Teammate) | TBD | `customer-info.html`, `checkout.html`, `confirmation.html` | Traveller details form, Order summary, Final booking confirmation receipt. |
+| Muhammad Qasim | 26I-3055 | `index.html` (Home)<br>`about.html` (About Safar North)<br>`destinations.html` (Destinations) | Shared responsive layout & navigation, Interactive FAQ accordion with expand/collapse all, Dynamic destination catalogue rendering, Real-time search filter with empty state, Trip Budget Estimator with validation & localStorage persistence, Local image optimization & asset attribution. |
+| Umar Hassan | 26I-3056 | `destination-details.html` (Destination Details)<br>`packages.html` (Travel Packages)<br>`booking.html` (Plan a Trip) | Destination details page driven by URL parameter, Package selection saved to trip, Plan-a-Trip booking form with validation and full trip cost calculation. |
+| Amna Hameed | 26I-3058 | `accommodation.html` (Accommodation)<br>`camping-shop.html` (Camping Gear)<br>`cart.html` (Cart) | Stay selection with per-night cost calculation, Camping gear shop with add-to-cart and live cart count, Cart with quantity editing, item removal and persistent subtotal (localStorage). |
+| Muhammad Sufyan Ali Shah | 26I-3057 | `customer-info.html` (Your Details)<br>`checkout.html` (Checkout Summary)<br>`confirmation.html` (Confirmation) | Customer details form with live validation, Checkout summary with full cost breakdown, Demo booking confirmation with reference code. |
 
 ---
 
