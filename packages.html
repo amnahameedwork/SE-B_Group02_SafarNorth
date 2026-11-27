@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 5 of 12: Travel Packages
+     Owner: Student 2 - Choose a Trip
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Packages | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html" class="active">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Attabad_lake_with_Passu_cone_sin_backdrop.jpg?width=1400')">
+      <h1>Travel Packages</h1>
+      <p>Three simple packages. Prices are per person.</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span class="done">2. Package</span><span>3. Plan</span><span>4. Stay &amp; Gear</span><span>5. Confirm</span>
+        </div>
+
+        <p class="note" id="chosen-place">No destination chosen yet. You can choose one on the next page.</p>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="card-body">
+              <span class="tag">3 nights</span>
+              <h2>Basic</h2>
+              <p class="price">PKR 20,000 <small>/ person</small></p>
+              <ul class="ticks">
+                <li>Shared coach from the city</li>
+                <li>Simple hotel, shared rooms</li>
+                <li>Breakfast every day</li>
+                <li>Group tour guide</li>
+              </ul>
+              <button class="btn btn-small" onclick="choosePackage('Basic')">Choose Basic</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-body">
+              <span class="tag">5 nights · Most popular</span>
+              <h2>Comfort</h2>
+              <p class="price">PKR 35,000 <small>/ person</small></p>
+              <ul class="ticks">
+                <li>AC coach from the city</li>
+                <li>3-star hotel, twin rooms</li>
+                <li>Breakfast and dinner</li>
+                <li>Guide and local jeep rides</li>
+              </ul>
+              <button class="btn btn-small" onclick="choosePackage('Comfort')">Choose Comfort</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-body">
+              <span class="tag">6 nights</span>
+              <h2>Adventure</h2>
+              <p class="price">PKR 48,000 <small>/ person</small></p>
+              <ul class="ticks">
+                <li>Coach plus 4x4 jeeps</li>
+                <li>Mix of hotel and camping</li>
+                <li>All meals</li>
+                <li>Trekking guide and porter</li>
+              </ul>
+              <button class="btn btn-small" onclick="choosePackage('Adventure')">Choose Adventure</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 2: travel packages -----
+
+    let trip = getData("trip", {});
+    if (trip.destination) {
+      document.getElementById("chosen-place").innerText =
+        "Planning a trip to " + trip.destination + ". Now choose a package.";
+    }
+
+    // Save selected package to trip and move to booking page
+    function choosePackage(pkgName) {
+      let currentTrip = getData("trip", {});
+      currentTrip.package = pkgName;
+      if (packages[pkgName]) {
+        currentTrip.nights = packages[pkgName].nights;
+      }
+      saveData("trip", currentTrip);
+      window.location.href = "booking.html";
+    }
+  </script>
+
+</body>
+</html>
