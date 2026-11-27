@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Shown only when a remote photo cannot load (for example, no internet) -->
+  <rect width="800" height="500" fill="#dfe8e4"/>
+  <path d="M0 400 L230 170 L360 300 L470 210 L800 420 L800 500 L0 500 Z" fill="#b8cbc3"/>
+  <text x="400" y="460" font-family="Arial, sans-serif" font-size="30" fill="#0f3b2f" text-anchor="middle">Photo unavailable</text>
+</svg>
