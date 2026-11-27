@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 11 of 12: Checkout Summary
+     Owner: Student 4 - Review and Confirm
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Summary | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Passu_Cones_-_Hunza_Valley_Pakistan.jpg?width=1400')">
+      <h1>Checkout Summary</h1>
+      <p>Check everything before you confirm</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span class="done">2. Package</span><span class="done">3. Plan</span><span class="done">4. Stay &amp; Gear</span><span class="done">5. Confirm</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="box">
+            <h3>🧭 Your trip</h3>
+            <div id="trip-summary"></div>
+            <p class="muted" style="margin-top:10px">
+              <a href="booking.html">Edit trip</a> · <a href="accommodation.html">Edit stay</a> ·
+              <a href="cart.html">Edit gear</a> · <a href="customer-info.html">Edit details</a>
+            </p>
+          </div>
+          <div class="box">
+            <h3>💰 Estimated cost</h3>
+            <div id="cost-summary"></div>
+            <p class="error" id="missing"></p>
+            <div class="actions">
+              <a href="customer-info.html" class="btn btn-outline">← Back to Details</a>
+              <button class="btn" id="confirm-btn" onclick="confirmBooking()">Confirm Demo Booking</button>
+            </div>
+            <p class="muted" style="font-size:13px">This is a demo. Confirming does not book anything or take payment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 4: checkout summary -----
+
+    let trip = getData("trip", {});
+    let customer = getData("customer", null);
+    let cart = getData("cart", []);
+
+    // Work out each part of the cost (0 if it is missing)
+    let tripCost = Number(trip.tripCost) || 0;
+    let stayPrice = Number(trip.stayPrice) || 0;
+    let nights = Number(trip.nights) || 0;
+    let stayCost = stayPrice * nights;
+    let gearCost = Number(cartTotal()) || 0;          // from script.js
+    let grandTotal = tripCost + stayCost + gearCost;
+
+    // Small helper: escape HTML characters before inserting text
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    // List of gear names, e.g. "Sleeping Bag × 2"
+    let gearText = "None";
+    if (cart.length > 0) {
+      gearText = "";
+      for (let i = 0; i < cart.length; i++) {
+        gearText += escapeHtml(cart[i].name) + " × " + Number(cart[i].qty) + "<br>";
+      }
+    }
+
+    // Small helper: one "label ..... value" line
+    function line(label, value) {
+      return '<div class="line"><span>' + label + '</span><span>' + value + '</span></div>';
+    }
+
+    let customerName = customer != null && customer.name ? escapeHtml(customer.name) : "Not entered";
+    let customerEmail = customer != null && customer.email ? escapeHtml(customer.email) : "Not entered";
+    let customerPhone = customer != null && customer.phone ? escapeHtml(customer.phone) : "Not entered";
+
+    document.getElementById("trip-summary").innerHTML =
+      line("Lead traveller", customerName) +
+      line("Email", customerEmail) +
+      line("Mobile", customerPhone) +
+      line("Destination", trip.destination ? escapeHtml(trip.destination) : "Not chosen") +
+      line("Departure city", trip.city ? escapeHtml(trip.city) : "Not chosen") +
+      line("Travel date", trip.date ? escapeHtml(trip.date) : "Not chosen") +
+      line("Package", trip.package ? escapeHtml(trip.package) + " (" + nights + " nights)" : "Not chosen") +
+      line("Travellers", trip.travellers ? escapeHtml(trip.travellers) : "-") +
+      line("Stay", trip.stay ? escapeHtml(trip.stay) : "Not chosen") +
+      line("Camping gear", gearText);
+
+    document.getElementById("cost-summary").innerHTML =
+      line("Trip (package, local costs, coach)", pkr(tripCost)) +
+      line("Stay (" + nights + " nights)", pkr(stayCost)) +
+      line("Camping gear", pkr(gearCost)) +
+      '<div class="line total"><span>Estimated total</span><span>' + pkr(grandTotal) + '</span></div>';
+
+    // Validate all required trip and customer data before allowing confirmation
+    let hasValidTrip = Boolean(
+      trip &&
+      String(trip.destination || "").trim() &&
+      String(trip.city || "").trim() &&
+      String(trip.date || "").trim() &&
+      String(trip.package || "").trim() &&
+      nights > 0 &&
+      Number(trip.travellers) > 0 &&
+      tripCost > 0
+    );
+
+    let hasValidCustomer = Boolean(
+      customer &&
+      String(customer.name || "").trim().length >= 3 &&
+      !String(customer.email || "").includes("..") &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(customer.email || "").trim()) &&
+      /^03\d{9}$/.test(String(customer.phone || "").trim())
+    );
+
+    // If something important is missing or invalid, turn off Confirm and explain why
+    let button = document.getElementById("confirm-btn");
+    if (!hasValidTrip && !hasValidCustomer) {
+      button.disabled = true;
+      document.getElementById("missing").innerHTML = 'Please <a href="booking.html">plan your trip</a> and <a href="customer-info.html">enter valid details</a> first.';
+    } else if (!hasValidTrip) {
+      button.disabled = true;
+      document.getElementById("missing").innerHTML = 'Please <a href="booking.html">complete your trip plan</a> first.';
+    } else if (!hasValidCustomer) {
+      button.disabled = true;
+      document.getElementById("missing").innerHTML = 'Please <a href="customer-info.html">enter valid customer details</a> first.';
+    }
+
+    // Save the final booking and go to the confirmation page
+    function confirmBooking() {
+      if (!hasValidTrip || !hasValidCustomer) {
+        document.getElementById("missing").innerHTML = 'Required trip or customer details are missing or invalid.';
+        return;
+      }
+      let gearItems = [];
+      for (let i = 0; i < cart.length; i++) {
+        gearItems.push({ name: String(cart[i].name || ""), qty: Number(cart[i].qty) || 0 });
+      }
+      let booking = {
+        ref: "SN-DEMO-" + Math.floor(1000 + Math.random() * 9000),   // e.g. SN-DEMO-4821
+        name: String(customer.name).trim(),
+        email: String(customer.email).trim(),
+        phone: String(customer.phone).trim(),
+        destination: trip.destination,
+        city: trip.city,
+        date: trip.date,
+        package: trip.package,
+        nights: nights,
+        travellers: Number(trip.travellers),
+        stay: trip.stay || "None",
+        gear: gearText,
+        gearItems: gearItems,
+        tripCost: tripCost,
+        stayCost: stayCost,
+        gearCost: gearCost,
+        total: grandTotal
+      };
+      saveData("booking", booking);
+      window.location.href = "confirmation.html";
+    }
+  </script>
+</body>
+</html>
