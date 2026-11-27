@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 1 of 12: Home
+     Owner: Student 1 - Discover Safar North
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button type="button" class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links" aria-label="Main navigation">
+        <a href="index.html" class="active" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO: big photo of Attabad Lake, Hunza -->
+    <section class="hero" style="background-image: url('images/Attabad.jpg')">
+      <div class="container">
+        <h1>Plan your trip to the mountains of Northern Pakistan</h1>
+        <p>Pick a destination, choose a package, add a stay and camping gear, and see your full trip cost before you book.</p>
+        <a href="destinations.html" class="btn">Explore Destinations</a>
+        <a href="booking.html" class="btn btn-light">Plan a Trip</a>
+        <p class="photo-credit">Photo: Attabad Lake, Hunza Valley (Wikimedia Commons — see ASSETS.md)</p>
+      </div>
+    </section>
+
+    <!-- FEATURED DESTINATIONS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Destinations</h2>
+          <p>Three of the most loved places in the north.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <img src="images/Hunza_Valley.jpg" alt="Hunza Valley seen from Eagle's Nest viewpoint" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <span class="location"><span aria-hidden="true">📍</span> Gilgit-Baltistan</span>
+              <h3>Hunza Valley</h3>
+              <p>Old forts, apricot orchards and Attabad Lake.</p>
+              <a href="destination-details.html?place=hunza" class="btn btn-small">View Details</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="images/Skardu.jpg" alt="Lower Kachura (Shangrila) Lake near Skardu" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <span class="location"><span aria-hidden="true">📍</span> Gilgit-Baltistan</span>
+              <h3>Skardu</h3>
+              <p>Blue lakes, a cold desert and the road to Deosai.</p>
+              <a href="destination-details.html?place=skardu" class="btn btn-small">View Details</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="images/Naran_Kaghan.jpg" alt="Saiful Muluk Lake near Naran, Kaghan Valley" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <span class="location"><span aria-hidden="true">📍</span> Khyber Pakhtunkhwa</span>
+              <h3>Naran Kaghan</h3>
+              <p>Lake Saiful Muluk and green summer valleys.</p>
+              <a href="destination-details.html?place=naran" class="btn btn-small">View Details</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW OUR TRIP PLANNING WORKS -->
+    <section class="section bg-white">
+      <div class="container">
+        <div class="section-title">
+          <h2>How Trip Planning Works</h2>
+          <p>Four easy steps. Each step is one part of this website.</p>
+        </div>
+        <div class="grid-4">
+          <div class="box"><h3>1. Discover</h3><p>Browse destinations and read about Safar North.</p></div>
+          <div class="box"><h3>2. Choose</h3><p>See place details, pick a package and plan your dates.</p></div>
+          <div class="box"><h3>3. Stay &amp; Gear</h3><p>Add a guest house, hotel or campsite and camping gear.</p></div>
+          <div class="box"><h3>4. Confirm</h3><p>Enter your details, check the summary and confirm.</p></div>
+        </div>
+        <div class="center"><a href="destinations.html" class="btn btn-green">Start with a Destination</a></div>
+      </div>
+    </section>
+
+    <!-- SAMPLE REVIEWS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>What Travellers Say</h2>
+          <p><span class="demo-badge">Sample reviews for the demo</span></p>
+        </div>
+        <div class="grid-3">
+          <div class="review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>"Attabad Lake and Baltit Fort were unforgettable."</p><b>Ayesha, Lahore</b></div>
+          <div class="review"><div class="stars" aria-label="4 out of 5 stars">★★★★☆</div><p>"The cost estimate helped us plan our budget."</p><b>Bilal, Karachi</b></div>
+          <div class="review"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>"Perfect family trip to Naran and Saiful Muluk."</p><b>Fatima, Islamabad</b></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p><span aria-hidden="true">📞</span> 0300-0000000 (demo) · <span aria-hidden="true">✉</span> hello@safarnorth.example</p>
+        <button type="button" class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+</body>
+</html>
