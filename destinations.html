@@ -64,6 +64,96 @@
         text-align: center;
       }
     }
+
+    /* ---- Trip Budget Estimator ---- */
+    .estimator {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--earth);
+      border-radius: 10px;
+      padding: 24px;
+      margin-top: 36px;
+    }
+    .estimator-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .estimator-header h2 {
+      font-size: 20px;
+      margin: 0;
+    }
+    .estimator-badge {
+      font-size: 12px;
+      background: #fff1dc;
+      color: var(--earth-dark);
+      border: 1px solid #ecd2ad;
+      border-radius: 12px;
+      padding: 2px 10px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .estimator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .estimator-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .estimator-result {
+      background: var(--sky);
+      border-left: 4px solid var(--pine);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-top: 16px;
+    }
+    .estimator-result .result-label {
+      font-size: 13px;
+      color: var(--grey);
+      margin-bottom: 4px;
+    }
+    .estimator-result .result-total {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--pine);
+    }
+    .estimator-result .result-breakdown {
+      font-size: 13px;
+      color: var(--grey);
+      margin-top: 4px;
+    }
+    .estimator-result .result-disclaimer {
+      font-size: 12px;
+      color: var(--grey);
+      margin-top: 8px;
+      border-top: 1px dashed var(--line);
+      padding-top: 8px;
+    }
+    .estimator-error {
+      color: #b03a2e;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 6px;
+      min-height: 20px;
+    }
+    @media (max-width: 640px) {
+      .estimator-grid {
+        grid-template-columns: 1fr;
+      }
+      .estimator-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .estimator-actions .btn {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -124,6 +214,50 @@
         </div>
 
         <p class="note">"From" price = Basic package + local costs + return coach fare from Islamabad. Sample prices for the demo.</p>
+
+        <!-- TRIP BUDGET ESTIMATOR (Student 1) -->
+        <section aria-labelledby="estimator-heading" class="estimator">
+          <div class="estimator-header">
+            <h2 id="estimator-heading">🧮 Trip Budget Estimator</h2>
+            <span class="estimator-badge">Estimated starting cost only</span>
+          </div>
+          <p style="font-size:14px; color:var(--grey); margin-bottom:16px;">
+            Get a quick estimate before you plan. Select a destination and enter the number of travellers.
+          </p>
+          <div class="estimator-grid">
+            <div class="field">
+              <label for="est-destination">Destination</label>
+              <select id="est-destination" onchange="estimatorDestinationChanged()">
+                <option value="">-- Choose a destination --</option>
+                <option value="Hunza Valley">Hunza Valley</option>
+                <option value="Skardu">Skardu</option>
+                <option value="Naran Kaghan">Naran Kaghan</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="est-travellers">Number of Travellers</label>
+              <input type="number" id="est-travellers" min="1" max="50" placeholder="e.g. 2">
+            </div>
+          </div>
+          <div class="field" id="est-per-person-row" hidden>
+            <p style="font-size:14px; color:var(--grey);">
+              Starting price per person: <strong id="est-per-person"></strong>
+            </p>
+          </div>
+          <p class="estimator-error" id="est-error" aria-live="polite"></p>
+          <div class="estimator-actions">
+            <button type="button" class="btn" onclick="calculateEstimate()">Calculate Estimated Cost</button>
+            <button type="button" class="btn btn-outline" onclick="resetEstimator()">Reset</button>
+          </div>
+          <div class="estimator-result" id="est-result" hidden>
+            <p class="result-label">Estimated starting cost for your trip</p>
+            <p class="result-total" id="est-total"></p>
+            <p class="result-breakdown" id="est-breakdown"></p>
+            <p class="result-disclaimer">
+              This is a rough starting estimate (destination "From" price × travellers). Actual costs depend on your package, departure city, stay and gear choices. Use <a href="booking.html">Plan a Trip</a> for a full breakdown.
+            </p>
+          </div>
+        </section>
       </div>
     </section>
   </main>
@@ -322,6 +456,133 @@
 
     searchInput.addEventListener("input", filterDestinations);
     renderDestinations(destinations, "");
+
+    // ----- Student 1: Trip Budget Estimator -----
+
+    // Prices used in the destination cards (From price × travellers)
+    const estimatorPrices = {
+      "Hunza Valley": 38000,
+      "Skardu":       41000,
+      "Naran Kaghan": 32000
+    };
+
+    const EST_KEY = "estimator"; // separate key — never conflicts with trip/cart/customer/booking
+
+    const estDestEl   = document.getElementById("est-destination");
+    const estTravEl   = document.getElementById("est-travellers");
+    const estErrorEl  = document.getElementById("est-error");
+    const estResultEl = document.getElementById("est-result");
+    const estTotalEl  = document.getElementById("est-total");
+    const estBreakEl  = document.getElementById("est-breakdown");
+    const estPerRow   = document.getElementById("est-per-person-row");
+    const estPerEl    = document.getElementById("est-per-person");
+
+    // Show per-person starting price when destination changes
+    function estimatorDestinationChanged() {
+      var dest = estDestEl.value;
+      estErrorEl.textContent = "";
+      if (dest && estimatorPrices[dest]) {
+        estPerEl.textContent = pkr(estimatorPrices[dest]) + " / person";
+        estPerRow.hidden = false;
+      } else {
+        estPerRow.hidden = true;
+        estPerEl.textContent = "";
+      }
+      saveEstimatorPrefs();
+    }
+
+    // Validate inputs and display the calculated total
+    function calculateEstimate() {
+      estErrorEl.textContent = "";
+      estResultEl.hidden = true;
+
+      var dest = estDestEl.value;
+      if (!dest) {
+        estErrorEl.textContent = "Please choose a destination.";
+        estDestEl.focus();
+        return;
+      }
+
+      var rawVal = estTravEl.value.trim();
+      if (rawVal === "") {
+        estErrorEl.textContent = "Please enter the number of travellers.";
+        estTravEl.focus();
+        return;
+      }
+      // Reject decimals before numeric conversion
+      if (rawVal.indexOf(".") !== -1) {
+        estErrorEl.textContent = "Travellers must be a whole number (no decimals).";
+        estTravEl.focus();
+        return;
+      }
+      var travellers = Number(rawVal);
+      if (isNaN(travellers)) {
+        estErrorEl.textContent = "Please enter a valid number of travellers.";
+        estTravEl.focus();
+        return;
+      }
+      if (!Number.isInteger(travellers)) {
+        estErrorEl.textContent = "Travellers must be a whole number (no decimals).";
+        estTravEl.focus();
+        return;
+      }
+      if (travellers < 1) {
+        estErrorEl.textContent = "At least 1 traveller is required.";
+        estTravEl.focus();
+        return;
+      }
+      if (travellers > 50) {
+        estErrorEl.textContent = "This estimator supports up to 50 travellers.";
+        estTravEl.focus();
+        return;
+      }
+
+      var pricePerPerson = estimatorPrices[dest];
+      var total = pricePerPerson * travellers;
+
+      estTotalEl.textContent = pkr(total);
+      estBreakEl.textContent =
+        pkr(pricePerPerson) + " × " + travellers +
+        (travellers === 1 ? " traveller" : " travellers");
+      estResultEl.hidden = false;
+
+      saveEstimatorPrefs();
+    }
+
+    // Reset the estimator to its initial blank state
+    function resetEstimator() {
+      estDestEl.value = "";
+      estTravEl.value = "";
+      estErrorEl.textContent = "";
+      estResultEl.hidden = true;
+      estPerRow.hidden = true;
+      estPerEl.textContent = "";
+      localStorage.removeItem(EST_KEY);
+    }
+
+    // Persist selected destination and traveller count
+    function saveEstimatorPrefs() {
+      saveData(EST_KEY, {
+        destination: estDestEl.value,
+        travellers:  estTravEl.value
+      });
+    }
+
+    // Restore preferences on page load
+    (function restoreEstimatorPrefs() {
+      var saved = getData(EST_KEY, null);
+      if (!saved) return;
+      if (saved.destination) {
+        estDestEl.value = saved.destination;
+        estimatorDestinationChanged();
+      }
+      if (saved.travellers) {
+        estTravEl.value = saved.travellers;
+      }
+    })();
+
+    // Save traveller count whenever the user changes the field
+    estTravEl.addEventListener("change", saveEstimatorPrefs);
   </script>
 
 </body>
