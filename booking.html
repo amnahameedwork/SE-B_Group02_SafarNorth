@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 6 of 12: Plan a Trip
+     Owner: Student 2 - Choose a Trip
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan a Trip | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html" class="active">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila%2C_Lower_Kachura_Lake.jpg?width=1400')">
+      <h1>Plan a Trip</h1>
+      <p>Fill in your trip and see the estimated cost</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span class="done">2. Package</span><span class="done">3. Plan</span><span>4. Stay &amp; Gear</span><span>5. Confirm</span>
+        </div>
+
+        <div class="split">
+          <div class="box">
+            <h2>Trip details</h2>
+
+            <div class="field">
+              <label for="destination">Destination</label>
+              <select id="destination">
+                <option value="Hunza Valley">Hunza Valley</option>
+                <option value="Skardu">Skardu</option>
+                <option value="Naran Kaghan">Naran Kaghan</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="city">Departure city</label>
+              <select id="city">
+                <option value="">-- Choose --</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Rawalpindi">Rawalpindi</option>
+                <option value="Peshawar">Peshawar</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Faisalabad">Faisalabad</option>
+                <option value="Multan">Multan</option>
+                <option value="Karachi">Karachi</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="date">Travel date</label>
+              <input type="date" id="date">
+            </div>
+
+            <div class="field">
+              <label for="travellers">Number of travellers</label>
+              <input type="number" id="travellers" min="1" max="20" value="1">
+            </div>
+
+            <div class="field">
+              <label for="package">Package</label>
+              <select id="package">
+                <option value="Basic">Basic</option>
+                <option value="Comfort">Comfort</option>
+                <option value="Adventure">Adventure</option>
+              </select>
+            </div>
+
+            <div class="actions">
+              <button class="btn" type="button" onclick="calculateTrip()">Calculate Estimated Cost</button>
+            </div>
+            <p class="error" id="form-error" aria-live="polite"></p>
+          </div>
+
+          <div class="box" id="cost-box">
+            <h2>Estimated cost</h2>
+            <p class="muted" id="cost-placeholder">Fill in the form and press Calculate Estimated Cost.</p>
+
+            <div id="cost-breakdown" style="display:none">
+              <div class="line"><span>Local costs in <span id="out-dest"></span></span><span id="out-local"></span></div>
+              <div class="line"><span id="out-pkg-label"></span><span id="out-pkg"></span></div>
+              <div class="line"><span id="out-city-label"></span><span id="out-city"></span></div>
+              <div class="line"><span>Per person</span><span id="out-per-person"></span></div>
+              <div class="line"><span>Travellers</span><span id="out-travellers"></span></div>
+              <div class="line total"><span>Estimated trip cost</span><span id="out-total"></span></div>
+
+              <div class="actions">
+                <a href="accommodation.html" class="btn">Next: Choose a Stay →</a>
+                <a href="customer-info.html" class="btn btn-outline">Skip extras, go to Your Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 2: plan a trip and estimate cost -----
+
+    // Pre-fill saved choices from earlier pages (destination-details, packages)
+    let savedTrip = getData("trip", {});
+    if (savedTrip.destination && destinationPrices[savedTrip.destination]) {
+      document.getElementById("destination").value = savedTrip.destination;
+    }
+    if (savedTrip.city && cityFares[savedTrip.city]) {
+      document.getElementById("city").value = savedTrip.city;
+    }
+    if (savedTrip.date) {
+      document.getElementById("date").value = savedTrip.date;
+    }
+    if (savedTrip.travellers) {
+      document.getElementById("travellers").value = savedTrip.travellers;
+    }
+    if (savedTrip.package && packages[savedTrip.package]) {
+      document.getElementById("package").value = savedTrip.package;
+    }
+
+    function calculateTrip() {
+      let dest = document.getElementById("destination").value;
+      let city = document.getElementById("city").value;
+      let date = document.getElementById("date").value;
+      let travellers = parseInt(document.getElementById("travellers").value, 10);
+      let pkg = document.getElementById("package").value;
+      let errorEl = document.getElementById("form-error");
+
+      errorEl.textContent = "";
+
+      if (!dest || !destinationPrices[dest]) {
+        errorEl.textContent = "Please choose a destination.";
+        return;
+      }
+      if (!city || !cityFares[city]) {
+        errorEl.textContent = "Please choose a departure city.";
+        return;
+      }
+      if (!date) {
+        errorEl.textContent = "Please choose a travel date.";
+        return;
+      }
+      if (isNaN(travellers) || travellers < 1 || travellers > 20) {
+        errorEl.textContent = "Number of travellers must be between 1 and 20.";
+        return;
+      }
+      if (!pkg || !packages[pkg]) {
+        errorEl.textContent = "Please choose a package.";
+        return;
+      }
+
+      let localCost = destinationPrices[dest];
+      let pkgInfo = packages[pkg];
+      let cityCost = cityFares[city];
+      let perPerson = localCost + pkgInfo.price + cityCost;
+      let total = perPerson * travellers;
+
+      document.getElementById("out-dest").textContent = dest;
+      document.getElementById("out-local").textContent = pkr(localCost);
+      document.getElementById("out-pkg-label").textContent = pkg + " package (" + pkgInfo.nights + " nights)";
+      document.getElementById("out-pkg").textContent = pkr(pkgInfo.price);
+      document.getElementById("out-city-label").textContent = "Return coach from " + city;
+      document.getElementById("out-city").textContent = pkr(cityCost);
+      document.getElementById("out-per-person").textContent = pkr(perPerson);
+      document.getElementById("out-travellers").textContent = travellers;
+      document.getElementById("out-total").textContent = pkr(total);
+
+      document.getElementById("cost-placeholder").style.display = "none";
+      document.getElementById("cost-breakdown").style.display = "block";
+
+      let trip = getData("trip", {});
+      trip.destination = dest;
+      trip.city = city;
+      trip.date = date;
+      trip.travellers = travellers;
+      trip.package = pkg;
+      trip.nights = pkgInfo.nights;
+      trip.localCost = localCost;
+      trip.packagePrice = pkgInfo.price;
+      trip.cityFare = cityCost;
+      trip.perPerson = perPerson;
+      trip.tripTotal = total;
+      trip.total = total;
+      saveData("trip", trip);
+    }
+
+    if (savedTrip.destination && savedTrip.city && savedTrip.date && savedTrip.travellers && savedTrip.package) {
+      calculateTrip();
+    }
+  </script>
+
+</body>
+</html>
