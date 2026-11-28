@@ -1,6 +1,8 @@
 # SE-B_Group02_SafarNorth
 Safar North – Northern Pakistan Tour Company (Theme #24), CL-1000 ICT Project, Group 02, SE-B
 
+**🌐 Live website:** https://amnahameedwork.github.io/SE-B_Group02_SafarNorth/
+
 ## Project Overview
 A 12-page static website (HTML5, CSS3, vanilla JavaScript) presenting a comprehensive Northern Pakistan tour company demo.
 
