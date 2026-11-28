@@ -163,6 +163,16 @@
   <script>
     // ----- Student 2: plan a trip and estimate cost -----
 
+    // Set the minimum selectable date to tomorrow (future-date validation at HTML level)
+    (function () {
+      let tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      let yyyy = tomorrow.getFullYear();
+      let mm = String(tomorrow.getMonth() + 1).padStart(2, "0");
+      let dd = String(tomorrow.getDate()).padStart(2, "0");
+      document.getElementById("date").min = yyyy + "-" + mm + "-" + dd;
+    })();
+
     // Pre-fill saved choices from earlier pages (destination-details, packages)
     let savedTrip = getData("trip", {});
     if (savedTrip.destination && destinationPrices[savedTrip.destination]) {
@@ -180,6 +190,18 @@
     if (savedTrip.package && packages[savedTrip.package]) {
       document.getElementById("package").value = savedTrip.package;
     }
+
+    // Hide the cost breakdown whenever the user changes any field (fix stale total)
+    function hideCostBreakdown() {
+      document.getElementById("cost-breakdown").style.display = "none";
+      document.getElementById("cost-placeholder").style.display = "";
+      document.getElementById("form-error").textContent = "";
+    }
+    document.getElementById("destination").addEventListener("change", hideCostBreakdown);
+    document.getElementById("city").addEventListener("change", hideCostBreakdown);
+    document.getElementById("date").addEventListener("change", hideCostBreakdown);
+    document.getElementById("travellers").addEventListener("input", hideCostBreakdown);
+    document.getElementById("package").addEventListener("change", hideCostBreakdown);
 
     function calculateTrip() {
       let dest = document.getElementById("destination").value;
@@ -201,6 +223,14 @@
       }
       if (!date) {
         errorEl.textContent = "Please choose a travel date.";
+        return;
+      }
+      // Future-date validation: reject any date that is today or in the past
+      let selectedDate = new Date(date + "T00:00:00");
+      let today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate <= today) {
+        errorEl.textContent = "Travel date must be a future date (at least tomorrow).";
         return;
       }
       if (isNaN(travellers) || travellers < 1 || travellers > 20) {
@@ -248,7 +278,13 @@
     }
 
     if (savedTrip.destination && savedTrip.city && savedTrip.date && savedTrip.travellers && savedTrip.package) {
-      calculateTrip();
+      // Only auto-calculate if the saved date is still in the future
+      let savedDate = new Date(savedTrip.date + "T00:00:00");
+      let today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (savedDate > today) {
+        calculateTrip();
+      }
     }
   </script>
 
