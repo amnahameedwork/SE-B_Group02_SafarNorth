@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 4 of 12: Destination Details
+     Owner: Student 2 - Choose a Trip
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destination Details | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html" class="active">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" id="banner">
+      <h1 id="place-name">Destination</h1>
+      <p id="place-location"></p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span>2. Package</span><span>3. Plan</span><span>4. Stay &amp; Gear</span><span>5. Confirm</span>
+        </div>
+
+        <div class="split">
+          <div>
+            <img id="place-photo" src="images/placeholder.svg" alt="" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <p class="caption" id="place-caption"></p>
+          </div>
+          <div>
+            <h2>About this place</h2>
+            <p id="place-intro"></p>
+            <div class="line"><span>📅 Best season</span><span id="place-season"></span></div>
+            <div class="line"><span>Local costs (jeeps, tickets, guide)</span><span id="place-local"></span></div>
+            <div class="line total"><span>Estimate from</span><span id="place-estimate"></span></div>
+            <p class="muted" style="font-size:13px">Basic package + local costs + return coach fare from Islamabad, per person.</p>
+            <div class="actions">
+              <button class="btn" onclick="choosePlace()">Choose a Package →</button>
+              <a href="destinations.html" class="btn btn-outline">← All Destinations</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top:36px">
+          <div class="box">
+            <h3>⭐ Highlights</h3>
+            <ul class="ticks" id="place-highlights"></ul>
+          </div>
+          <div class="box">
+            <h3>🥾 Activities</h3>
+            <ul class="ticks" id="place-activities"></ul>
+          </div>
+          <div class="box">
+            <h3>⚠ Travel Notes</h3>
+            <ul class="ticks" id="place-notes"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 2: destination details -----
+
+    const places = {
+      hunza: {
+        name: "Hunza Valley",
+        location: "Hunza, Gilgit-Baltistan",
+        photo: "https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley%2C_view_from_Eagle%27s_Nest.jpg?width=1000",
+        banner: "https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley%2C_view_from_Eagle%27s_Nest.jpg?width=1400",
+        alt: "Hunza Valley seen from Eagle's Nest viewpoint",
+        caption: "Hunza Valley seen from Eagle's Nest viewpoint. Photo: Alllexxxis (CC BY-SA 4.0, Wikimedia Commons)",
+        intro: "Hunza Valley sits along the scenic Karakoram Highway in Gilgit-Baltistan and is known for centuries-old Baltit and Altit forts, terraced apricot orchards, and turquoise Attabad Lake. Visitors enjoy sweeping views of Rakaposhi (7,788 m) and the Passu Cones, with local jeeps and guided visits included in your trip.",
+        season: "April to October (spring blossoms & autumn colours)",
+        highlights: [
+          "Baltit Fort and Altit Fort in Karimabad",
+          "Attabad Lake and Hussaini Suspension Bridge",
+          "Passu Cones and Passu Glacier viewpoint",
+          "Eagle's Nest (Duiker) sunrise & sunset ridge"
+        ],
+        activities: [
+          "Guided heritage walk through Karimabad",
+          "Boating on Attabad Lake",
+          "Day drive up to Khunjerab Pass",
+          "Short trek to Hopper or Passu glacier"
+        ],
+        notes: [
+          "Carry a warm fleece and windbreaker even in summer",
+          "Bring CNIC or passport for Karakoram Highway checkpoints",
+          "Mobile data can be patchy beyond Karimabad",
+          "Local jeep is included for Duiker and Hopper"
+        ]
+      },
+      skardu: {
+        name: "Skardu",
+        location: "Skardu, Gilgit-Baltistan",
+        photo: "https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila%2C_Lower_Kachura_Lake.jpg?width=1000",
+        banner: "https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila%2C_Lower_Kachura_Lake.jpg?width=1400",
+        alt: "Lower Kachura (Shangrila) Lake near Skardu",
+        caption: "Lower Kachura (Shangrila) Lake near Skardu. Photo: Hasanijaz (CC BY-SA 4.0, Wikimedia Commons)",
+        intro: "Skardu is the main town of Baltistan and the gateway to K2 and other high peaks. Surrounded by dramatic Karakoram ranges, it pairs serene alpine lakes like Upper and Lower Kachura with the Katpana Cold Desert, historic Skardu Fort, and 4x4 jeep excursions across the Deosai Plains.",
+        season: "May to September",
+        highlights: [
+          "Upper & Lower Kachura",
+          "Katpana Cold Desert",
+          "Deosai Plains",
+          "Skardu Fort"
+        ],
+        activities: [
+          "Jeep trip to Deosai",
+          "Desert walk at sunset",
+          "Boating at Kachura",
+          "Photography"
+        ],
+        notes: [
+          "Flights depend on weather",
+          "Deosai closed by snow in winter",
+          "Nights cold in summer"
+        ]
+      },
+      naran: {
+        name: "Naran Kaghan",
+        location: "Mansehra, Khyber Pakhtunkhwa",
+        photo: "https://commons.wikimedia.org/wiki/Special:FilePath/Saiful_Muluk_Lake_near_Naran%2C_Kaghan_Valley_4.jpg?width=1000",
+        banner: "https://commons.wikimedia.org/wiki/Special:FilePath/Saiful_Muluk_Lake_near_Naran%2C_Kaghan_Valley_4.jpg?width=1400",
+        alt: "Saiful Muluk Lake near Naran, Kaghan Valley",
+        caption: "Saiful Muluk Lake near Naran, Kaghan Valley. Photo: Kashif Rehman Arain (CC BY-SA 4.0, Wikimedia Commons)",
+        intro: "Naran and Kaghan form a lush summer valley along the Kunhar River, offering the closest mountain escape from Islamabad. From emerald Lake Saiful Muluk and pine-covered Lalazar meadows to the high pass of Babusar Top, it is ideal for families, first-time travellers, and short summer breaks.",
+        season: "May to September (summer; winter road closed)",
+        highlights: [
+          "Glacial Lake Saiful Muluk above Naran",
+          "Kunhar River banks and trout spots",
+          "Babusar Top (4,173 m) mountain pass",
+          "Lulusar Lake and Lalazar meadows"
+        ],
+        activities: [
+          "4x4 jeep ride up to Lake Saiful Muluk",
+          "River rafting on the Kunhar River",
+          "Scenic drive to Lulusar Lake and Babusar Top",
+          "Short meadow walks at Lalazar plateau"
+        ],
+        notes: [
+          "Road to Naran usually closes from November to April due to snow",
+          "Peak summer weekends can be busy — book stays early",
+          "Grip shoes are helpful around snowy patches at Saiful Muluk",
+          "Carry warm clothing for windy afternoons at Babusar Top"
+        ]
+      }
+    };
+
+    let key = new URLSearchParams(window.location.search).get("place");
+    if (!key || !places[key]) {
+      key = "hunza";
+    }
+    let place = places[key];
+
+    let local = destinationPrices[place.name];
+    let estimate = local + packages["Basic"].price + cityFares["Islamabad"];
+
+    document.title = place.name + " | Safar North";
+    document.getElementById("banner").style.backgroundImage = "url('" + place.banner + "')";
+    document.getElementById("place-name").textContent = place.name;
+    document.getElementById("place-location").textContent = "📍 " + place.location;
+
+    let photoEl = document.getElementById("place-photo");
+    photoEl.src = place.photo;
+    photoEl.alt = place.alt;
+
+    document.getElementById("place-caption").textContent = place.caption;
+    document.getElementById("place-intro").textContent = place.intro;
+    document.getElementById("place-season").textContent = place.season;
+    document.getElementById("place-local").textContent = pkr(local);
+    document.getElementById("place-estimate").textContent = pkr(estimate);
+
+    // Populate a <ul> list with text items
+    function fillList(id, items) {
+      let ul = document.getElementById(id);
+      ul.innerHTML = "";
+      for (let i = 0; i < items.length; i++) {
+        let li = document.createElement("li");
+        li.textContent = items[i];
+        ul.appendChild(li);
+      }
+    }
+
+    fillList("place-highlights", place.highlights);
+    fillList("place-activities", place.activities);
+    fillList("place-notes", place.notes);
+
+    // Save selected destination to trip and move to packages page
+    function choosePlace() {
+      let trip = getData("trip", {});
+      trip.destination = place.name;
+      saveData("trip", trip);
+      window.location.href = "packages.html";
+    }
+  </script>
+
+</body>
+</html>
