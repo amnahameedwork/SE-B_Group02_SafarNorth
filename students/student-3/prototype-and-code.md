@@ -353,7 +353,7 @@ Each block is the complete file, exactly as it is in the website folder.
   </header>
 
   <main>
-    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley_from_above_the_Biltit_Fort.jpg?width=1400')">
+    <section class="banner" style="background-image: url('images/Hunza_Landscapes.jpg')">
       <h1>Choose a Stay</h1>
       <p>A guest house, a hotel or a campsite: or skip this step</p>
     </section>
@@ -368,7 +368,7 @@ Each block is the complete file, exactly as it is in the website folder.
 
         <div class="grid-3">
           <article class="card" id="card-guesthouse">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley_from_above_the_Biltit_Fort.jpg?width=800" alt="Karimabad, Hunza Valley, seen from above Baltit Fort" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/Baltit_fort.jpg" alt="Baltit Fort in Karimabad, Hunza Valley" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <span class="tag">Guest House · Area photo</span>
               <h3>Karimabad Family Guest House</h3>
@@ -380,7 +380,7 @@ Each block is the complete file, exactly as it is in the website folder.
           </article>
 
           <article class="card" id="card-hotel">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lower_Kachura_lake%2C_Shangrilla_Resorts%2C_Skardu%2C_Pakistan.jpg?width=800" alt="Lower Kachura Lake near Skardu" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/Skardu.jpg" alt="Lower Kachura Lake near Skardu" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <span class="tag">Hotel · Area photo</span>
               <h3>Skardu Lakeside Hotel</h3>
@@ -392,7 +392,7 @@ Each block is the complete file, exactly as it is in the website folder.
           </article>
 
           <article class="card" id="card-camp">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Saiful_Muluk_%28Naran_Valley%29.JPG?width=800" alt="Lake Saiful Muluk in the Naran Valley" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/Naran_Kaghan.jpg" alt="Lake Saiful Muluk in the Naran Valley" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <span class="tag">Campsite · Area photo</span>
               <h3>Naran Riverside Campsite</h3>
@@ -553,7 +553,7 @@ Each block is the complete file, exactly as it is in the website folder.
   </header>
 
   <main>
-    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Saiful_Muluk_%28Naran_Valley%29.JPG?width=1400')">
+    <section class="banner" style="background-image: url('images/Pasu_cones.jpg')">
       <h1>Camping Gear</h1>
       <p>Optional extras for your trip</p>
     </section>
@@ -568,7 +568,7 @@ Each block is the complete file, exactly as it is in the website folder.
 
         <div class="grid-3">
           <article class="card">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Camping_tent.jpg?width=800" alt="A dome camping tent pitched outdoors" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/gear-tent.svg" alt="Illustration of a dome camping tent" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <h3>3-Person Tent</h3>
               <p>Waterproof dome tent. Sets up in about 10 minutes.</p>
@@ -577,7 +577,7 @@ Each block is the complete file, exactly as it is in the website folder.
             </div>
           </article>
           <article class="card">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mummy_bag.jpg?width=800" alt="A mummy-style sleeping bag" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/gear-sleeping-bag.svg" alt="Illustration of a sleeping bag" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <h3>Sleeping Bag</h3>
               <p>Warm mummy-style bag for cold nights, rated to -5°C.</p>
@@ -586,7 +586,7 @@ Each block is the complete file, exactly as it is in the website folder.
             </div>
           </article>
           <article class="card">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Backpacks_from_the_Habagat_Outdoor_Equipment_%282023-09-03%29.jpg?width=800" alt="Hiking backpacks on display" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/gear-backpack.svg" alt="Illustration of a hiking backpack" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <h3>Hiking Backpack 50L</h3>
               <p>Padded straps and a rain cover for multi-day trips.</p>
@@ -595,7 +595,7 @@ Each block is the complete file, exactly as it is in the website folder.
             </div>
           </article>
           <article class="card">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/LED_Flashlights.jpg?width=800" alt="LED flashlights" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/gear-flashlight.svg" alt="Illustration of an LED flashlight" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <h3>LED Flashlight</h3>
               <p>Rechargeable torch for campsites and night walks.</p>
@@ -604,7 +604,7 @@ Each block is the complete file, exactly as it is in the website folder.
             </div>
           </article>
           <article class="card">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trekking_poles.jpg?width=800" alt="A pair of trekking poles" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/gear-trekking-poles.svg" alt="Illustration of a pair of trekking poles" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <h3>Trekking Poles (Pair)</h3>
               <p>Adjustable poles that protect your knees downhill.</p>
@@ -613,7 +613,7 @@ Each block is the complete file, exactly as it is in the website folder.
             </div>
           </article>
           <article class="card">
-            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stainless_steel_water_bottle.jpg?width=800" alt="A stainless steel water bottle" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <img src="images/gear-water-bottle.svg" alt="Illustration of a steel water bottle" onerror="this.onerror=null; this.src='images/placeholder.svg';">
             <div class="card-body">
               <h3>Steel Water Bottle</h3>
               <p>1 litre bottle that keeps water hot or cold.</p>
@@ -752,7 +752,7 @@ Each block is the complete file, exactly as it is in the website folder.
   </header>
 
   <main>
-    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila%2C_Lower_Kachura_Lake.jpg?width=1400')">
+    <section class="banner" style="background-image: url('images/Attabad.jpg')">
       <h1>Your Cart</h1>
       <p>Camping gear you added to this trip</p>
     </section>
