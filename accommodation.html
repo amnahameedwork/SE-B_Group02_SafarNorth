@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 7 of 12: Accommodation
+     Owner: Student 3 - Stay and Gear
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accommodation | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html" class="active">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley_from_above_the_Biltit_Fort.jpg?width=1400')">
+      <h1>Choose a Stay</h1>
+      <p>A guest house, a hotel or a campsite: or skip this step</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span class="done">2. Package</span><span class="done">3. Plan</span><span class="done">4. Stay &amp; Gear</span><span>5. Confirm</span>
+        </div>
+
+        <p class="note" id="stay-info">Prices are per room (or tent) per night. Sample stays for the demo. Photos show the area, not the property.</p>
+
+        <div class="grid-3">
+          <article class="card" id="card-guesthouse">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley_from_above_the_Biltit_Fort.jpg?width=800" alt="Karimabad, Hunza Valley, seen from above Baltit Fort" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <span class="tag">Guest House · Area photo</span>
+              <h3>Karimabad Family Guest House</h3>
+              <span class="location">📍 Karimabad, Hunza</span>
+              <ul class="ticks"><li>Home-cooked meals</li><li>Hot water</li><li>Valley view</li></ul>
+              <p class="price">PKR 6,500 <small>/ night</small></p>
+              <button class="btn btn-small" onclick="chooseStay('Karimabad Family Guest House', 6500)">Select</button>
+            </div>
+          </article>
+
+          <article class="card" id="card-hotel">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lower_Kachura_lake%2C_Shangrilla_Resorts%2C_Skardu%2C_Pakistan.jpg?width=800" alt="Lower Kachura Lake near Skardu" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <span class="tag">Hotel · Area photo</span>
+              <h3>Skardu Lakeside Hotel</h3>
+              <span class="location">📍 Near Kachura, Skardu</span>
+              <ul class="ticks"><li>Restaurant</li><li>Room heating</li><li>Parking</li></ul>
+              <p class="price">PKR 12,000 <small>/ night</small></p>
+              <button class="btn btn-small" onclick="chooseStay('Skardu Lakeside Hotel', 12000)">Select</button>
+            </div>
+          </article>
+
+          <article class="card" id="card-camp">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Saiful_Muluk_%28Naran_Valley%29.JPG?width=800" alt="Lake Saiful Muluk in the Naran Valley" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <span class="tag">Campsite · Area photo</span>
+              <h3>Naran Riverside Campsite</h3>
+              <span class="location">📍 Naran, Kaghan Valley</span>
+              <ul class="ticks"><li>Tent and mattress</li><li>Bonfire</li><li>Shared washrooms</li></ul>
+              <p class="price">PKR 3,500 <small>/ night</small></p>
+              <button class="btn btn-small" onclick="chooseStay('Naran Riverside Campsite', 3500)">Select</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="box" style="margin-top:24px">
+          <p id="stay-result">No stay selected yet.</p>
+          <div class="actions">
+            <a href="booking.html" class="btn btn-outline">← Back to Plan a Trip</a>
+            <button class="btn btn-outline" onclick="noStay()">I don't need a stay</button>
+            <a href="camping-shop.html" class="btn">Next: Camping Gear →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 3: choose a stay -----
+
+    // How many nights? It comes from the package chosen on the booking page.
+    function getNights() {
+      let trip = getData("trip", {});
+      if (trip.nights) {
+        return trip.nights;
+      }
+      return 3;                              // no package yet: use 3 nights
+    }
+
+    // Save the chosen stay and its price per night into the trip
+    function chooseStay(name, pricePerNight) {
+      let trip = getData("trip", {});
+      trip.stay = name;
+      trip.stayPrice = pricePerNight;
+      saveData("trip", trip);
+      showStay();
+    }
+
+    // Remove the stay from the trip
+    function noStay() {
+      let trip = getData("trip", {});
+      trip.stay = "None";
+      trip.stayPrice = 0;
+      saveData("trip", trip);
+      showStay();
+    }
+
+    // Show what is selected and highlight that card
+    function showStay() {
+      let trip = getData("trip", {});
+      let cards = ["card-guesthouse", "card-hotel", "card-camp"];
+      for (let i = 0; i < cards.length; i++) {
+        document.getElementById(cards[i]).classList.remove("chosen");
+      }
+      if (trip.stay == undefined) {
+        return;
+      }
+      if (trip.stay == "None") {
+        document.getElementById("stay-result").innerHTML = "No stay needed. You can still add camping gear.";
+        return;
+      }
+      if (trip.stay.indexOf("Guest House") != -1) document.getElementById("card-guesthouse").classList.add("chosen");
+      if (trip.stay.indexOf("Hotel") != -1) document.getElementById("card-hotel").classList.add("chosen");
+      if (trip.stay.indexOf("Campsite") != -1) document.getElementById("card-camp").classList.add("chosen");
+
+      document.getElementById("stay-result").innerHTML =
+        "Selected: <b>" + trip.stay + "</b>: " + pkr(trip.stayPrice) + " × " + getNights() + " nights = <b>" + pkr(trip.stayPrice * getNights()) + "</b>";
+    }
+
+    showStay();
+  </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 8 of 12: Camping Gear
+     Owner: Student 3 - Stay and Gear
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camping Gear | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html" class="active">Gear</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Lake_Saiful_Muluk_%28Naran_Valley%29.JPG?width=1400')">
+      <h1>Camping Gear</h1>
+      <p>Optional extras for your trip</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span class="done">2. Package</span><span class="done">3. Plan</span><span class="done">4. Stay &amp; Gear</span><span>5. Confirm</span>
+        </div>
+
+        <p class="success" id="cart-message" style="display:none"></p>
+
+        <div class="grid-3">
+          <article class="card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Camping_tent.jpg?width=800" alt="A dome camping tent pitched outdoors" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <h3>3-Person Tent</h3>
+              <p>Waterproof dome tent. Sets up in about 10 minutes.</p>
+              <p class="price">PKR 14,500</p>
+              <button class="btn btn-small" onclick="addToCart('3-Person Tent', 14500)">Add to Cart</button>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mummy_bag.jpg?width=800" alt="A mummy-style sleeping bag" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <h3>Sleeping Bag</h3>
+              <p>Warm mummy-style bag for cold nights, rated to -5°C.</p>
+              <p class="price">PKR 6,800</p>
+              <button class="btn btn-small" onclick="addToCart('Sleeping Bag', 6800)">Add to Cart</button>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Backpacks_from_the_Habagat_Outdoor_Equipment_%282023-09-03%29.jpg?width=800" alt="Hiking backpacks on display" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <h3>Hiking Backpack 50L</h3>
+              <p>Padded straps and a rain cover for multi-day trips.</p>
+              <p class="price">PKR 8,900</p>
+              <button class="btn btn-small" onclick="addToCart('Hiking Backpack 50L', 8900)">Add to Cart</button>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/LED_Flashlights.jpg?width=800" alt="LED flashlights" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <h3>LED Flashlight</h3>
+              <p>Rechargeable torch for campsites and night walks.</p>
+              <p class="price">PKR 1,800</p>
+              <button class="btn btn-small" onclick="addToCart('LED Flashlight', 1800)">Add to Cart</button>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Trekking_poles.jpg?width=800" alt="A pair of trekking poles" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <h3>Trekking Poles (Pair)</h3>
+              <p>Adjustable poles that protect your knees downhill.</p>
+              <p class="price">PKR 4,800</p>
+              <button class="btn btn-small" onclick="addToCart('Trekking Poles (Pair)', 4800)">Add to Cart</button>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stainless_steel_water_bottle.jpg?width=800" alt="A stainless steel water bottle" onerror="this.onerror=null; this.src='images/placeholder.svg';">
+            <div class="card-body">
+              <h3>Steel Water Bottle</h3>
+              <p>1 litre bottle that keeps water hot or cold.</p>
+              <p class="price">PKR 2,200</p>
+              <button class="btn btn-small" onclick="addToCart('Steel Water Bottle', 2200)">Add to Cart</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- Safety tips -->
+        <div class="box" style="margin-top:28px">
+          <h3>⚠ Safety tips for the mountains</h3>
+          <ul class="ticks">
+            <li>Nights are cold even in July. Pack a warm layer.</li>
+            <li>Drink plenty of water at high places like Deosai.</li>
+            <li>Tell your guide before going on a hike alone.</li>
+          </ul>
+        </div>
+
+        <div class="actions">
+          <a href="accommodation.html" class="btn btn-outline">← Back to Stays</a>
+          <a href="cart.html" class="btn">View Cart →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 3: add gear to the cart -----
+    // The cart is a list like: [ { name: "Sleeping Bag", price: 6800, qty: 1 } ]
+
+    function addToCart(name, price) {
+      let cart = getData("cart", []);
+      let found = false;
+
+      // If the item is already in the cart, add 1 to its quantity
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].name == name) {
+          cart[i].qty = cart[i].qty + 1;
+          found = true;
+        }
+      }
+      // Otherwise add it as a new item
+      if (found == false) {
+        cart.push({ name: name, price: price, qty: 1 });
+      }
+
+      saveData("cart", cart);
+      updateCartCount();                     // from script.js
+
+      let message = document.getElementById("cart-message");
+      message.style.display = "block";
+      message.innerHTML = "✓ <b>" + name + "</b> added to your cart. <a href=\"cart.html\">View cart</a>";
+    }
+  </script>
+</body>
+</html>

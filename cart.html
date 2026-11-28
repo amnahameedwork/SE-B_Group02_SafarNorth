@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- ===================================================
+     Page 9 of 12: Cart
+     Owner: Student 3 - Stay and Gear
+     =================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart | Safar North</title>
+  <!-- Fonts: Poppins for English, Noto Nastaliq Urdu for the logo -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@700&family=Poppins:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SHARED HEADER (same on all 12 pages) ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Safar North home">
+        <span class="logo-urdu" lang="ur" dir="rtl">سفر</span>
+        <span class="logo-en">North</span>
+      </a>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+      <nav class="nav" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+        <a href="accommodation.html">Stays</a>
+        <a href="camping-shop.html">Gear</a>
+        <a href="cart.html" class="active">Cart <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila%2C_Lower_Kachura_Lake.jpg?width=1400')">
+      <h1>Your Cart</h1>
+      <p>Camping gear you added to this trip</p>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="steps">
+          <span class="done">1. Destination</span><span class="done">2. Package</span><span class="done">3. Plan</span><span class="done">4. Stay &amp; Gear</span><span>5. Confirm</span>
+        </div>
+
+        <div class="box table-wrap">
+          <table>
+            <thead>
+              <tr><th>Item</th><th>Price</th><th>Quantity</th><th>Total</th><th></th></tr>
+            </thead>
+            <tbody id="cart-rows"></tbody>
+          </table>
+          <p class="error" id="cart-error"></p>
+          <div class="line total"><span>Gear subtotal</span><span id="cart-subtotal">PKR 0</span></div>
+        </div>
+
+        <p class="note">Change a quantity and the totals update straight away. Gear is optional, an empty cart is fine.</p>
+
+        <div class="actions">
+          <a href="camping-shop.html" class="btn btn-outline">← Add More Gear</a>
+          <a href="booking.html" class="btn btn-outline">Back to Planning</a>
+          <a href="customer-info.html" class="btn">Continue to Your Details →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SHARED FOOTER (same on all 12 pages) ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h4><span class="logo-urdu" lang="ur" dir="rtl">سفر</span> North</h4>
+        <p>A student demo of a Northern Pakistan tour company. No real bookings or payments.</p>
+        <p>📞 0300-0000000 (demo) · ✉ hello@safarnorth.example</p>
+        <button class="btn btn-small btn-light" onclick="startOver()">Start Over</button>
+      </div>
+      <div>
+        <h4>1. Discover</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Safar North</a>
+        <a href="destinations.html">Destinations</a>
+      </div>
+      <div>
+        <h4>2. Choose a Trip</h4>
+        <a href="destination-details.html?place=hunza">Destination Details</a>
+        <a href="packages.html">Travel Packages</a>
+        <a href="booking.html">Plan a Trip</a>
+      </div>
+      <div>
+        <h4>3. Stay &amp; Gear</h4>
+        <a href="accommodation.html">Accommodation</a>
+        <a href="camping-shop.html">Camping Gear</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div>
+        <h4>4. Review &amp; Confirm</h4>
+        <a href="customer-info.html">Your Details</a>
+        <a href="checkout.html">Checkout Summary</a>
+        <a href="confirmation.html">Confirmation</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Safar North · CL-1000 ICT class project · Photos from Wikimedia Commons (see ASSETS.md)</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script>
+    // ----- Student 3: the cart page -----
+
+    // Draw the table from the saved cart
+    function showCart() {
+      let cart = getData("cart", []);
+      let rows = "";
+
+      for (let i = 0; i < cart.length; i++) {
+        rows +=
+          "<tr>" +
+          "<td>" + cart[i].name + "</td>" +
+          "<td>" + pkr(cart[i].price) + "</td>" +
+          "<td><input type='number' min='1' max='10' value='" + cart[i].qty + "' onchange='changeQty(" + i + ", this.value)'></td>" +
+          "<td><b>" + pkr(cart[i].price * cart[i].qty) + "</b></td>" +
+          "<td><button class='btn btn-small btn-outline' onclick='removeItem(" + i + ")'>Remove</button></td>" +
+          "</tr>";
+      }
+
+      if (cart.length == 0) {
+        rows = "<tr><td colspan='5' class='center'>Your cart is empty. <a href='camping-shop.html'>Add camping gear</a></td></tr>";
+      }
+
+      document.getElementById("cart-rows").innerHTML = rows;
+      document.getElementById("cart-subtotal").innerText = pkr(cartTotal());   // cartTotal() is in script.js
+      updateCartCount();
+    }
+
+    // Change how many of one item (must be a whole number from 1 to 10)
+    function changeQty(index, newQty) {
+      let cart = getData("cart", []);
+      let qty = Number(newQty);
+      let error = document.getElementById("cart-error");
+
+      if (newQty == "" || qty < 1 || qty > 10 || qty != Math.floor(qty)) {
+        error.innerText = "Quantity must be a whole number from 1 to 10.";
+        showCart();                          // put the old number back
+        return;
+      }
+      error.innerText = "";
+      cart[index].qty = qty;
+      saveData("cart", cart);
+      showCart();
+    }
+
+    // Delete one item from the cart
+    function removeItem(index) {
+      let cart = getData("cart", []);
+      cart.splice(index, 1);                 // remove 1 item at this position
+      document.getElementById("cart-error").innerText = "";
+      saveData("cart", cart);
+      showCart();
+    }
+
+    showCart();
+  </script>
+</body>
+</html>
